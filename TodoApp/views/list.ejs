@@ -26,9 +26,7 @@
         <li class="list-group-item">
           <p>글번호: <%= posts[i]._id %>
           </p>
-          <h4>할일 제목: <a href="/detail/<%= posts[i]._id %>">
-              <%= posts[i].제목 %>
-            </a> </h4>
+          <h4>할일 제목: <a href="/detail/<%= posts[i]._id %>"><%= posts[i].제목 %></a> </h4>
           <!-- href 부분에 ejs태그 사용하여 post의 id를 넣어 해결함... -->
           <!-- 이를 통해서 href는 html태그 안에 자유롭게 삽입이 가능하다는 것을 알 수 있당.. -->
           <p>할일 마감날짜: <%= posts[i].날짜 %>
@@ -56,8 +54,6 @@
         console.log('실패')
       })
     });
-
-
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
