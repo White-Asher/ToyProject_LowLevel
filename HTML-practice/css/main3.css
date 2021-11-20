@@ -1,0 +1,71 @@
+td, th{
+    border: 1px solid black;
+}
+
+div,input,textarea,h6,p{
+    box-sizing: border-box;
+}
+
+table{
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.container{
+    background-color: skyblue;
+    padding: 30px;
+    width: 600px;
+    
+}
+
+.title{
+    color:blue;
+}
+
+.text-align-right{
+    text-align: right;
+}
+
+.vertical-align-middle{
+    vertical-align: middle;
+}
+
+.goods-table{
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.goods-table th:nth-child(1){
+    width:400px
+}
+.goods-table td, th{
+    padding: 15px;
+    border: 2px solid #c2d3de;
+}
+
+.edit-your-shopping-cart{
+    float: left;
+}
+
+.choose-payment-method-button{
+    float: right;   
+    padding: 5px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: coral;
+    color: white;
+    cursor: pointer;
+}
+
+.choose-payment-method-button:hover{
+    background-color: chocolate;
+}
+
+.choose-payment-method-button:focus{
+    background-color: gray;
+}
+
+.choose-payment-method-button:active{
+    background-color: brown;
+}
