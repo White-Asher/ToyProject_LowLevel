@@ -1,0 +1,31 @@
+.listt li {
+  list-style-type: none;
+  width: 300px;
+  padding: 15px;
+  border: 1px solid black;
+}
+.listt .active {
+  background-color: blue;
+  color: white;
+}
+
+.alert-green {
+  width: 100px;
+  height: 20px;
+  border: 1px solid black;
+  background-color: green;
+}
+
+.alert-blue {
+  width: 100px;
+  height: 20px;
+  border: 1px solid black;
+  background-color: blue;
+}
+
+.alert-yellow {
+  width: 100px;
+  height: 20px;
+  border: 1px solid black;
+  background-color: yellow;
+}/*# sourceMappingURL=test.css.map */

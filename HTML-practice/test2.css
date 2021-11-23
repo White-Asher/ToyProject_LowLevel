@@ -1,0 +1,53 @@
+.btn-shake{
+    background-color: rgba(7, 217, 245, 0.979);
+    color: white;
+    border-radius: 5%;
+    border:none;
+    width: 100px;
+    height: 50px;
+}   
+.btn-shake:hover{
+    animation-name: btn-shake-key;
+    animation-duration: 0.5s;
+}
+
+@keyframes btn-shake-key{
+    0%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(-10deg);
+    }
+    50%{
+        transform: rotate(10deg);
+    }
+    75%{
+        transform: rotate(-10deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+h2{
+    font-size: 40px;
+    width: 50px;
+    height: 50px;
+}
+h2:after {
+    content: ' \002B';
+}
+
+h2:hover{
+    animation-name: plus-hover-event;
+    animation-duration: 0.5s;
+}
+
+@keyframes plus-hover-event {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(45deg);
+        font-size: 70px;
+    }
+}

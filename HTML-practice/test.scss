@@ -1,0 +1,33 @@
+.listt{
+    li{
+        list-style-type: none;
+        width: 300px;
+
+        padding: 15px;
+        border: 1px solid black;
+    }
+    .active{
+        background-color: blue;
+        color: white;
+    }
+}
+
+@mixin alter {
+    width: 100px;
+    height: 20px;
+    border: 1px solid black;
+}
+.alert-green{
+    @include alter();
+    background-color: green;
+}
+
+.alert-blue{
+    @include alter();
+    background-color: blue;
+}
+
+.alert-yellow{
+    @include alter();
+    background-color: yellow;
+}
