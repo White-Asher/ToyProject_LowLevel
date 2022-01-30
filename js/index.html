@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="alert-box" id="alert-box">
+        <p id="alert-box-text">Alert 박스</p>
+        <!-- <button onclick="alertoption('none'); ">Close</button> -->
+        <button id="close"> X </button>
+    </div>
+    <h4 id="test1">hi</h4>
+
+    <button onclick="alertoption('block','ID를 입력하세요')">Button1</button>
+    <button onclick="alertoption('block', 'pw를 입력하세요')">Button2</button>
+
+    <p class="greeting">HIHIHI</p>
+    <p class="greeting">HIHIHI</p>
+    <p class="greeting">HIHIHI</p>
+
+    <button class="btn">버튼  btn</button>
+    <button class="btn">버튼  btn</button>
+    <button class="btn">버튼  btn</button>
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+        $('.btn').on('click',function(){
+            $('.greeting').hide();
+        });
+
+        $('#test1').addClass('yellow-bg');
+        $('.greeting').html('hello');
+
+        function alertoption(parameter1,parameter2){
+            document.getElementById('alert-box').style.display = parameter1;
+            document.getElementById("alert-box-text").innerHTML = parameter2;
+        }
+
+        document.getElementById('close').addEventListener('click',function(){
+            document.getElementById('alert-box').style.display = 'none';
+        });
+
+
+    </script>
+
+</body>
+</html>
