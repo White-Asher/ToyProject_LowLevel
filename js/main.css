@@ -22,7 +22,7 @@
     z-index: 5;
     width: 100%;
     height: 100%;
-    transform: translateY(-1000px);
+    transform: translateY(-3000px);
     display: block;
     transition: all 1s;
 }
@@ -43,6 +43,17 @@
     display: flex;
     justify-content: space-between;
     padding: 15px;
+    align-items: center;
+    background-color: transparent;
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    color: white;
+}
+
+.nav-black{
+    background: white;
+    color: black;
 }
 
 .nav-sub{
@@ -65,3 +76,70 @@
     position: fixed;
     margin-left: -150px;
 }
+
+.slide-container{
+    width: 300vw;
+    transition: transform 1s;
+}
+
+.slide-box{
+    height: 50vw;
+    width: 100vw;
+    float: left;
+}
+
+.slide-next{
+    position: absolute;
+    right: 0;
+    top: 45%;
+}
+
+.slide-pre{
+    position: absolute;
+    left: 0;
+    top: 45%;
+}
+.slide-pre-triger{
+    transform: translateX(100vw);
+}
+
+.nav-bar{
+
+}
+
+ul.list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid #ccc;
+  }
+  ul.list::after {
+	content: '';
+	display: block;
+	clear: both;
+  }
+  .tab-button {
+	display: block;
+	padding: 10px 20px 10px 20px;
+	float: left;
+	margin-right: -1px;
+	margin-bottom: -1px;
+	color: grey;
+	text-decoration: none;
+	cursor: pointer;
+  }
+  .active {
+	border-top: 2px solid orange;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid white;
+	border-left: 1px solid #ccc;
+	color: black;
+	margin-top: -2px;
+  }
+  .tab-content {
+	display: none;
+	padding: 10px;
+  }
+  .show {
+	display: block;
+  }

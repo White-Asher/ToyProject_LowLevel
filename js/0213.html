@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous">
+</script>
+
+    <div class="card-group container">
+      <div class="card">
+        <img src="https://via.placeholder.com/600">
+        <div class="card-body">
+          <h5 class="title">Card title</h5>
+          <p class="price">가격 : 70000</p>
+          <button class="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/600">
+        <div class="card-body">
+          <h5 class="title">Card title</h5>
+          <p class="price">가격 : 70000</p>
+          <button class="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/600">
+        <div class="card-body">
+          <h5 class="title">Card title</h5>
+          <p class="price">가격 : 70000</p>
+          <button class="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+    </div>
+    
+    <div>
+      <button class="priceSort btn btn-danger">가격정렬</button>
+      <button class="titleSort btn btn-danger">가나다정렬</button>
+      <button class="priceFilter btn btn-danger">5만원이하</button>
+    </div>
+    
+
+
+    <script>
+      var products = [
+        { id : 0, price : 70000, title : 'Blossom Dress' },
+        { id : 1, price : 50000, title : 'Springfield Shirt' },
+        { id : 2, price : 60000, title : 'Black Monastery' }
+      ]
+      var saveProducts = products
+
+      function showGoods(){
+        for(var i=0; i<=2; i++){
+          $('.title').eq(i).html(products[i].title)
+          $('.price').eq(i).html('가격: '+ products[i].price)
+        }
+      }
+      showGoods();
+      
+      const priceButton = document.querySelector('.priceSort');
+      const titleButton = document.querySelector('.titleSort');
+      const priceFilterButton = document.querySelector('.priceFilter');
+      
+      function priceSortFun(){
+        products.sort(function(a,b){
+        return a.price - b.price
+        });
+        showGoods();
+      };
+
+      function titleSortFun(){
+        products.sort(function(a,b){
+          var titleA = a.title.toUpperCase();
+          var titleB = b.title.toUpperCase();
+          return (titleA < titleB)? -1 : (titleB == titleA)? 0:1;
+        });
+        showGoods();
+      };
+
+      function priceFilterFun(){
+          var newProducts = products.filter(function(element){
+          console.log(element.price);
+          return element.price<=50000
+        });
+        console.log(newProducts)
+        
+      }
+      
+      priceButton.addEventListener('click', function() {
+        priceSortFun();
+      });
+
+      titleButton.addEventListener('click', function() {
+        titleSortFun();
+      });
+      
+      priceFilterButton.addEventListener('click', function() {
+        priceFilterFun();
+      });
+
+      
+    </script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+  </body>
+</html>

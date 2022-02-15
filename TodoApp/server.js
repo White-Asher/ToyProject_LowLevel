@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
+const http = require('http').createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(http);
 const MongoClient = require('mongodb').MongoClient;
 app.use(express.urlencoded({extended: true}))
 app.set('view emgine','ejs');
 app.use('/public', express.static('public'))
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
-
 require('dotenv').config()
 
 var db;
@@ -14,7 +16,7 @@ MongoClient.connect(process.env.DB_URL,{useUnifiedTopology:true}, function(error
     db = client.db('todoapp');
 });
 
-app.listen(process.env.PORT,function(){
+http.listen(process.env.PORT,function(){
     console.log('listening on ' + process.env.PORT)
 });
 
@@ -216,4 +218,15 @@ app.post('/upload', upload.array('profile', 10) , function(req,res){
 
 app.get('/image/:imageName' , function (req,res){
     res.sendFile(__dirname + '/public/image/' + req.params.imageName)
+})
+
+app.get('/chat',function(req,res){
+    res.render('chat.ejs')
+});
+
+io.on('connection',function(socket){
+    console.log('connection complete');
+    socket.on('인삿말',function(data){
+        console.log(data)
+    })
 })
