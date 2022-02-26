@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="test" src="https://codingapple1.github.io/kona.jpg"> 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+    <script>
+
+        let promiseTest = new Promise(function(resolve,reject){
+            let imgSelect = document.querySelector('img');
+            imgSelect.addEventListener('load', function(){
+                resolve();
+            })
+            imgSelect.addEventListener('error', function(){
+                reject();
+            })
+        });
+        promiseTest.then(function(){
+            console.log('성공')
+        }).catch(function(){
+            console.log('실패')
+        })
+        
+        let ajaxPromise = new Promise(function(resolve,reject){
+            $.ajax({
+                type : 'GET',
+                url : 'https://codingapple1.github.io/hello.txt'
+              }).done(function(result){
+                  console.log(result)
+              });
+        })
+        .then(function(){
+            console.log(result);
+            let ajaxPromise2 = new Promise(function(resolve,reject){
+                $.ajax({
+                    type : 'GET',
+                    url : 'https://codingapple1.github.io/hello2.txt'
+                  }).done(function(result){
+                      console.log(result)
+                  })
+                  return ajaxPromise2
+            .then(function(result){
+                console.log(result)
+            })
+        })
+    });
+
+    </script>
+</body>
+</html>

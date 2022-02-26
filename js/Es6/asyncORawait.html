@@ -7,9 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="0225js.js"></script>
-    <script type="module">
-        import a from '/library.js'
+    <script>
+        async function plus(callback){
+            return 1 + 1
+            callback()
+        }
+        plus().then(function(result){
+            console.log(result)
+        })
+
     </script>
 </body>
 </html>
