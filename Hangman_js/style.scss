@@ -9,15 +9,21 @@ body{
 }
 
 .container{
-    width : 800px;
+    width : 700px;
 }
 
 button{
     width: 50px;
     height: 50px;
+    border-radius: 20%;
 }
-
-.alphabet-button{
-    // width: 50px;
-    // height: 50px;
+.word{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.wordletter{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
 }
