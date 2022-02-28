@@ -27,3 +27,29 @@ button{
     height: 50px;
     font-size: 30px;
 }
+
+@mixin opacity {
+    opacity:0.4;
+    filter:alpha(opacity=40); 
+    @include fade;
+  }
+
+@mixin fade {
+    -moz-transition: all 1s ease-in;
+    -moz-transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+}
+
+.active{
+    @include opacity;
+    cursor:default;
+    &:hover{
+        @include fade;
+        @include opacity;
+      }
+
+}
+
+.resetBtn{
+    width: 100px;
+}
