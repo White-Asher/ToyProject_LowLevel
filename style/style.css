@@ -18,20 +18,22 @@ ul {
   margin-bottom: 2rem;
 }
 
-.blockArea > ul {
-  border: 1px solid black;
+.blockarea ul {
+  border: 1px solid #333;
+  width: 250px;
+  margin: 0 auto;
 }
 
-.blockArea > ul > li {
+.blockarea > ul > li {
   width: 100%;
   height: 25px;
 }
 
-.blockArea > ul > li > ul {
+.blockarea > ul > li > ul {
   display: flex;
 }
 
-.blockArea > ul > li > ul > li {
+.blockarea > ul > li > ul > li {
   width: 25px;
   height: 25px;
   outline: 1px solid #ccc;
