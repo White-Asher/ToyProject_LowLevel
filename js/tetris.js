@@ -73,7 +73,7 @@ function renderBloacks(moveType=""){
 }
 
 function showGameoverText(){
-    gameText.style.display = "flex"
+    // gameText.style.display = "flex"
 }
 
 function seizeBlock(){

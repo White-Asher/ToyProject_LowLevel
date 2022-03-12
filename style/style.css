@@ -12,20 +12,65 @@ ul {
   list-style: none;
 }
 
-.score {
+.container {
+  padding-top: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+  float: left;
+}
+
+.sidearea {
+  border: 20px solid #16293f;
+  border-left: 0px;
+  float: right;
+  width: 250px;
+  font-size: 26px;
   text-align: center;
-  font-size: 36px;
-  margin-bottom: 2rem;
+  background-color: #8f90f1;
+}
+
+.scorearea {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 20px solid #16293f;
+}
+
+.score {
+  font-size: 24px;
+  padding-top: 10px;
+}
+
+.nextblockarea {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 20px solid #16293f;
+}
+
+.nextblock {
+  height: 86px;
+}
+
+.keyinfo {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+.blockarea {
+  float: left;
+  width: 250px;
+  border: 20px solid #16293f;
 }
 
 .blockarea ul {
-  border: 1px solid #333;
+  border: 0px solid #333;
   width: 250px;
   margin: 0 auto;
 }
 
 .blockarea > ul > li {
-  width: 100%;
+  width: 70%;
   height: 25px;
 }
 
@@ -73,8 +118,6 @@ ul {
   align-items: center;
   flex-direction: column;
   position: fixed;
-  width: 100%;
-  height: 100%;
   background: rgba(0, 0, 0, 0.7);
   left: 0;
   top: 0;

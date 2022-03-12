@@ -8,12 +8,33 @@
 <body>
     <div class="container">
         <div class="gametext">
-            <span>게임종료</span>
-            <button>다시시작</button>
+            <span>Game Over</span>
+            <button>Restart</button>
         </div>
-        <div class="score">0</div>
+
         <div class="blockarea">
             <ul></ul>
+        </div>
+        <div class="sidearea">
+            <div class="scorearea">
+                <p>SCORE</p>
+                <div class="score">0</div>
+            </div>
+            <div class="nextblockarea">
+                <p>Next Block</p>
+                <div class="nextblock"></div>
+            </div>
+            <div class="keyinfo">
+                <span>
+                    ↓ : Push<br>
+                    Space : Hard Push<br>
+                    ↑ : Change Block<br>
+                    ← : Left<br>
+                    → : Right<br>
+                    P : Pause
+                </span>
+            </div>
+
         </div>
     </div>
     <script src="./js/tetris.js" type="module"></script>
