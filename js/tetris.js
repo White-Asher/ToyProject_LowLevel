@@ -1,5 +1,9 @@
-const blockarea = document.querySelector(".blockarea > ul");
+import BLOCKS from "./blocks.js"
 
+const blockarea = document.querySelector(".blockarea > ul");
+const gameText = document.querySelector(".gametext");
+const scoreDisplay = document.querySelector(".score");
+const restartBtn = document.querySelector(".gametext > button");
 const gameRows = 20;
 const gameCols = 10;
 
@@ -8,17 +12,8 @@ let fallingTime = 600;
 let downInterval;
 let tempMovingItem;
 
-const BLOCKS = {
-    block_T :[
-        [[2,1],[0,1],[1,0],[1,1]],
-        [[1,2],[0,1],[1,0],[1,1]],
-        [[1,2],[0,1],[2,1],[1,1]],
-        [[2,1],[1,2],[1,0],[1,1]]
-    ]
-}
-
 const movingItem = {
-    type: "block_T",
+    type: "",
     direction: 0,
     top: 0,
     left: 3,
@@ -29,7 +24,7 @@ function init(){
     for (let i = 0; i< gameRows; i++){
         appendNewLine()
     }
-    renderBloacks()
+    generateNewBlock()
 }
 init()
 
@@ -38,10 +33,10 @@ function appendNewLine(){
     const liTag = document.createElement("li");
     for(let j = 0; j < 10 ; j++){
         const ulli = document.createElement("li");
-        ulTag.appendChild(ulli)
+        ulTag.prepend(ulli)
     }
-    liTag.appendChild(ulTag)
-    blockarea.appendChild(liTag)
+    liTag.prepend(ulTag)
+    blockarea.prepend(liTag)
 }
 
 function renderBloacks(moveType=""){
@@ -50,7 +45,6 @@ function renderBloacks(moveType=""){
     movingBlocks.forEach(moving =>{
         moving.classList.remove(type,"moving");
     })
-    console.log( BLOCKS[type][direction])
     BLOCKS[type][direction].some(block=>{
         const x = block[0] + left;
         const y = block[1] + top;
@@ -60,8 +54,12 @@ function renderBloacks(moveType=""){
             target.classList.add(type,"moving")
         } else {
             tempMovingItem = { ...movingItem }
+            if(moveType === 'retry'){
+                clearInterval(downInterval);
+                showGameoverText()
+            }
             setTimeout(()=>{
-                renderBloacks();
+                renderBloacks('retry');
                 if(moveType === "top"){
                     seizeBlock();
                 }
@@ -74,16 +72,48 @@ function renderBloacks(moveType=""){
     movingItem.direction = direction;
 }
 
+function showGameoverText(){
+    gameText.style.display = "flex"
+}
+
 function seizeBlock(){
     const movingBlocks = document.querySelectorAll(".moving");
     movingBlocks.forEach(moving =>{
         moving.classList.remove("moving");
         moving.classList.add("seized");
     })
-    generateNewBlock()
+    checkMatch()
+}
+function checkMatch(){
+    
+    const childNodes = blockarea.childNodes;
+    childNodes.forEach(child=>{
+        let matched = true;
+        child.children[0].childNodes.forEach(li=>{
+            if(!li.classList.contains("seized")){
+                matched = false;
+            }
+        })
+        if(matched){
+            child.remove();
+            appendNewLine();
+            score++;
+            scoreDisplay.innerHTML = score;
+        }
+    })
+    generateNewBlock();
 }
 
 function generateNewBlock(){
+
+    clearInterval(downInterval);
+    downInterval = setInterval(()=>{
+        moveBlock('top',1)
+    },fallingTime)
+
+    const blockarray = Object.entries(BLOCKS);
+    const randomIndex = Math.floor(Math.random()*blockarray.length)
+    movingItem.type = blockarray[randomIndex][0]
     movingItem.top = 0;
     movingItem.left = 3;
     movingItem.direction = 0;
@@ -109,6 +139,19 @@ function changeDirection(){
     renderBloacks()
 }
 
+function dropBlock(){
+    clearInterval(downInterval);
+    downInterval = setInterval(()=>{
+        moveBlock("top",1)
+    },10)
+}
+
+restartBtn.addEventListener("click",function(){
+    blockarea.innerHTML = "";
+    gameText.style.display = "none"
+    init()
+})
+
 document.addEventListener("keydown",function(e){
     switch(e.keyCode){
         case 39:
@@ -122,6 +165,9 @@ document.addEventListener("keydown",function(e){
             break;
         case 38:
             changeDirection();
+            break;
+        case 32:
+            dropBlock();
             break;
         default:
             break;
