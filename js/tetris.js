@@ -1,16 +1,24 @@
 import BLOCKS from "./blocks.js"
 
 const blockarea = document.querySelector(".blockarea > ul");
+const blockareaContain = document.querySelector(".blockarea");
+const sidearea = document.querySelector(".sidearea");
 const gameText = document.querySelector(".gametext");
 const scoreDisplay = document.querySelector(".score");
 const restartBtn = document.querySelector(".gametext > button");
+const container = document.querySelector(".container");
+const pauseTag = document.querySelector(".pause");
+const nextblock = document.querySelector(".nextblock > ul");
 const gameRows = 20;
 const gameCols = 10;
+const nextBlockRows = 2;
+
 
 let score = 0;
 let fallingTime = 600;
 let downInterval;
 let tempMovingItem;
+var gamestate = 0
 
 const movingItem = {
     type: "",
@@ -23,6 +31,9 @@ function init(){
     tempMovingItem = { ...movingItem };
     for (let i = 0; i< gameRows; i++){
         appendNewLine()
+    }
+    for (let i = 0; i< nextBlockRows; i++){
+        showNextblockline()
     }
     generateNewBlock()
 }
@@ -37,6 +48,17 @@ function appendNewLine(){
     }
     liTag.prepend(ulTag)
     blockarea.prepend(liTag)
+}
+
+function showNextblockline(){
+    const ulTag = document.createElement("ul");
+    const liTag = document.createElement("li");
+    for(let j = 0; j < 4 ; j++){
+        const ulli = document.createElement("li");
+        ulTag.prepend(ulli)
+    }
+    liTag.prepend(ulTag)
+    nextblock.prepend(liTag)
 }
 
 function renderBloacks(moveType=""){
@@ -73,7 +95,7 @@ function renderBloacks(moveType=""){
 }
 
 function showGameoverText(){
-    // gameText.style.display = "flex"
+    gameText.style.display = "flex"
 }
 
 function seizeBlock(){
@@ -105,7 +127,6 @@ function checkMatch(){
 }
 
 function generateNewBlock(){
-
     clearInterval(downInterval);
     downInterval = setInterval(()=>{
         moveBlock('top',1)
@@ -145,6 +166,25 @@ function dropBlock(){
         moveBlock("top",1)
     },10)
 }
+function pause(){
+    if (gamestate == 0){
+        blockareaContain.style.visibility = "hidden";
+        sidearea.style.visibility = "hidden";
+        pauseTag.style.display = "block";
+        clearInterval(downInterval);
+        gamestate = 1
+    }
+
+    else if(gamestate == 1){
+        pauseTag.style.display = "none";
+        blockareaContain.style.visibility = "visible";
+        sidearea.style.visibility = "visible";
+        downInterval = setInterval(()=>{
+            moveBlock('top',1)
+        },fallingTime)
+        gamestate = 0
+    }
+}
 
 restartBtn.addEventListener("click",function(){
     blockarea.innerHTML = "";
@@ -168,6 +208,9 @@ document.addEventListener("keydown",function(e){
             break;
         case 32:
             dropBlock();
+            break;
+        case 80:
+            pause();
             break;
         default:
             break;

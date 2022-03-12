@@ -83,6 +83,29 @@ ul {
     outline: 1px solid #ccc;
 }
 
+.nextblock > ul {
+    border: 0px solid #333;
+    width: 250px;
+    margin: 0;
+    padding-top: 20px;
+    padding-left: 75px;
+}
+
+.nextblock > ul > li {
+    width: 100%;
+    height: 25px;
+}
+
+.nextblock > ul > li > ul {
+    display: flex;
+}
+
+.nextblock > ul > li > ul > li {
+    width: 25px;
+    height: 25px;
+    outline: 1px solid #ccc;
+}
+
 .block_I{
     background: skyblue;
 }
@@ -111,8 +134,8 @@ ul {
     align-items: center;
     flex-direction: column;
     position: fixed;
-    // width: 100%;
-    // height: 100%;
+    width: 100%;
+    height: 100%;
     background: rgba(0,0,0,0.7);
     left: 0;
     top: 0;
@@ -126,4 +149,10 @@ ul {
     background: salmon;
     border: none;
     cursor: pointer;
+}
+
+.pause{
+    font-size: 40px;
+    text-align: center;
+    display: none;
 }
