@@ -119,27 +119,29 @@ function checkMatch(){
         if(matched){
             child.remove();
             appendNewLine();
-            score++;
+            score = score + 10;
             scoreDisplay.innerHTML = score;
         }
     })
     generateNewBlock();
 }
 
+
 function generateNewBlock(){
     clearInterval(downInterval);
     downInterval = setInterval(()=>{
         moveBlock('top',1)
-    },fallingTime)
+    }, fallingTime)
 
     const blockarray = Object.entries(BLOCKS);
     const randomIndex = Math.floor(Math.random()*blockarray.length)
-    movingItem.type = blockarray[randomIndex][0]
+
+    movingItem.type = blockarray[randomIndex][0];
     movingItem.top = 0;
     movingItem.left = 3;
     movingItem.direction = 0;
     tempMovingItem = {...movingItem};
-    renderBloacks()
+    renderBloacks();
 }
 
 function checkEmpty(target){
