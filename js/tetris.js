@@ -9,16 +9,21 @@ const restartBtn = document.querySelector(".gametext > button");
 const container = document.querySelector(".container");
 const pauseTag = document.querySelector(".pause");
 const nextblock = document.querySelector(".nextblock > ul");
+const blockarray = Object.entries(BLOCKS);
 const gameRows = 20;
 const gameCols = 10;
 const nextBlockRows = 2;
 
-
+var count = -1;
 let score = 0;
 let fallingTime = 600;
 let downInterval;
 let tempMovingItem;
 var gamestate = 0
+var randomIndexArray = []
+var temprandomIndexArray = []
+var randomIndex = 0;
+let scoreCombo = 0;
 
 const movingItem = {
     type: "",
@@ -27,22 +32,32 @@ const movingItem = {
     left: 3,
 };
 
+const nextItem = {
+    type: "",
+    direction: 0,
+    top: 0,
+    left: 0,
+};
+
 function init(){
     tempMovingItem = { ...movingItem };
+    // tempnextItem = { ...nextItem };
+
     for (let i = 0; i< gameRows; i++){
         appendNewLine()
     }
     for (let i = 0; i< nextBlockRows; i++){
         showNextblockline()
     }
-    generateNewBlock()
+    generateNewBlock();
+
 }
 init()
 
 function appendNewLine(){
     const ulTag = document.createElement("ul");
     const liTag = document.createElement("li");
-    for(let j = 0; j < 10 ; j++){
+    for(let j = 0; j < gameCols ; j++){
         const ulli = document.createElement("li");
         ulTag.prepend(ulli)
     }
@@ -59,6 +74,24 @@ function showNextblockline(){
     }
     liTag.prepend(ulTag)
     nextblock.prepend(liTag)
+}
+
+function generateNewBlock(){
+    clearInterval(downInterval);
+    downInterval = setInterval(()=>{
+        moveBlock('top',1)
+    }, fallingTime)
+
+    let presentarray = randomValueIndex()
+    
+    movingItem.type = blockarray[presentarray[count]][0];
+    movingItem.top = 0;
+    movingItem.left = 3;
+    movingItem.direction = 0;
+    tempMovingItem = {...movingItem};
+
+    // showNextBlock(presentarray);
+    renderBloacks();
 }
 
 function renderBloacks(moveType=""){
@@ -94,6 +127,83 @@ function renderBloacks(moveType=""){
     movingItem.direction = direction;
 }
 
+function randomValueIndex(){
+    const blocklength = blockarray.length
+    if(count == -1){
+        randomIndexArray = []
+        for (let i=0; i< blocklength; i++) {   
+            const randomNum = Math.floor(Math.random() *blockarray.length)
+            if (randomIndexArray.indexOf(randomNum) === -1) {
+                randomIndexArray.push(randomNum)
+            } else { 
+                i--
+            }
+        }
+    } 
+
+    randomIndex = randomIndexArray[count]
+    count = count + 1
+
+    if(count == blocklength-1){
+        temprandomIndexArray = []
+        for (let i=0; i< blocklength; i++) {   
+            const randomNum = Math.floor(Math.random() *blockarray.length)
+            if (temprandomIndexArray.indexOf(randomNum) === -1) {
+                temprandomIndexArray.push(randomNum)
+            } else { 
+                i--
+            }
+        }
+    }
+
+    else if (count == blocklength) {
+        count = 0
+        randomIndexArray = [...temprandomIndexArray]
+    }
+    console.log(count)
+    console.log(randomIndexArray)
+    return randomIndexArray
+}
+
+// function showNextBlock(presentarray){
+//     if(count == 6){
+//         nextItem.type = blockarray[temprandomIndexArray[0]][0];
+//         nextItem.top = 0;
+//         nextItem.left = 0;
+//         nextItem.direction = 0;
+//         console.log(nextItem)
+//     }
+//     else{
+//         nextItem.type = blockarray[presentarray[count+1]][0];
+//         nextItem.top = 0;
+//         nextItem.left = 0;
+//         nextItem.direction = 0;
+//         console.log(nextItem)
+//     }
+    
+//     // tempnextItem = {...nextItem};
+//     // const { type, direction, top, left } = tempnextItem;
+
+// }
+
+// function shownextBlockaaaa(moveType=""){
+//     const { type, direction, top, left } = tempMovingItem;
+//     BLOCKS[type][direction].some(block=>{
+//         const x = block[0] + left;
+//         const y = block[1] + top;
+//         const target = nextblock.children[y]? nextblock.children[y].children[0].children[x] : null;
+//         const isAvailable = checkEmpty(target)
+        
+//         movingBlocks.forEach(moving =>{
+//             moving.classList.remove("moving");
+//             moving.classList.add("seized");
+//         })
+//     })
+//     movingItem.left = left;
+//     movingItem.top = top;
+//     movingItem.direction = direction;
+// }
+
 function showGameoverText(){
     gameText.style.display = "flex"
 }
@@ -106,8 +216,8 @@ function seizeBlock(){
     })
     checkMatch()
 }
+
 function checkMatch(){
-    
     const childNodes = blockarea.childNodes;
     childNodes.forEach(child=>{
         let matched = true;
@@ -119,29 +229,31 @@ function checkMatch(){
         if(matched){
             child.remove();
             appendNewLine();
-            score = score + 10;
-            scoreDisplay.innerHTML = score;
+            scoreCombo = scoreCombo + 1
         }
     })
+    if(scoreCombo){
+        switch (scoreCombo) {
+            case 1:
+                score = score + 1;
+                scoreDisplay.innerHTML = score;
+                break;
+            case 2:
+                score = score + 2;
+                scoreDisplay.innerHTML = score;
+                break;
+            case 3:
+                score = score + 5;
+                scoreDisplay.innerHTML = score;
+                break;
+            case 4:
+                score = score + 10;
+                scoreDisplay.innerHTML = score;
+                break;
+          }
+          scoreCombo = 0
+    }
     generateNewBlock();
-}
-
-
-function generateNewBlock(){
-    clearInterval(downInterval);
-    downInterval = setInterval(()=>{
-        moveBlock('top',1)
-    }, fallingTime)
-
-    const blockarray = Object.entries(BLOCKS);
-    const randomIndex = Math.floor(Math.random()*blockarray.length)
-
-    movingItem.type = blockarray[randomIndex][0];
-    movingItem.top = 0;
-    movingItem.left = 3;
-    movingItem.direction = 0;
-    tempMovingItem = {...movingItem};
-    renderBloacks();
 }
 
 function checkEmpty(target){
