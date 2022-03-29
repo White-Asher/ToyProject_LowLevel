@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/style.css">
+    <title>Tetris</title>
+</head>
+<body>
+    <div class="container">
+        <div class="gametext">
+            <span>Game Over</span>
+            <button>Restart</button>
+        </div>
+        <div class="pause">
+            <span>
+                Pause the Game<br>
+                Press 'P' button
+            </span>
+        </div>
+
+        <div class="blockarea">
+            <ul></ul>
+        </div>
+        <div class="sidearea">
+            <div class="scorearea">
+                <p>SCORE</p>
+                <div class="score">0</div>
+            </div>
+            <div class="nextblockarea">
+                <p>Next Block</p>
+                <div class="nextblock">
+                    <ul></ul>
+                </div>
+            </div>
+            <div class="keyinfo">
+                <span>
+                    ↓ : Push<br>
+                    Space : Hard Push<br>
+                    ↑ : Change Block<br>
+                    ← : Left<br>
+                    → : Right<br>
+                    P : Pause
+                </span>
+            </div>
+
+        </div>
+    </div>
+    <script src="./js/tetris.js" type="module"></script>
+</body>
+</html>
