@@ -7,20 +7,19 @@ import java.util.Set;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public class ComputerRandom {
+public class Computer {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 9;
     private static final int NUMBER_OF_DIGIT = 3;
 
-    public List<Integer> createComputerNumber(){
-        Set<Integer> computerNumberSet = new HashSet<>();
+    public String[] createComputerNumber(){
+        Set<String> computerNumberSet = new HashSet<>();
 
         while(computerNumberSet.size() != NUMBER_OF_DIGIT){
-            computerNumberSet.add(getRandomNumber());
+            computerNumberSet.add(Integer.toString(getRandomNumber()));
         }
 
-        List<Integer> computerNumberList = new ArrayList<>(computerNumberSet);
-
+        String[] computerNumberList = computerNumberSet.toArray(new String[0]);
         return computerNumberList;
     }
 
