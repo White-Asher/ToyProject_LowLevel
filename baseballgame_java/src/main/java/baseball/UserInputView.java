@@ -11,17 +11,18 @@ public class UserInputView {
     private static final String USER_NUMBER_REGEX = "^[1-9]{3}$";
     private static final String ILLEGAL_ARGUMENT_EXCEPTION_ERROR_MESSAGE = "잘못된 사용자 입력입니다.";
 
-    public void userInputMain(){
+    public String[] userInputMain(){
         System.out.printf("숫자를 입력해 주세요 : ");
         String userInputValueString = Console.readLine();
-        userInput(userInputValueString);
+        String[] result = userInput(userInputValueString);
+        return result;
     }
 
-    public void userInput(String userInputValueString){
+    public String[] userInput(String userInputValueString){
         String[] convertInputValueStringList = userInputValueString.split("");
         inputValidationDuplicate(convertInputValueStringList);
         inputValidationRangeCheck(userInputValueString);
-
+        return convertInputValueStringList;
     }
 
     public void userInput(){
